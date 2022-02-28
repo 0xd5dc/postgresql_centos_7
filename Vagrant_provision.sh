@@ -12,3 +12,12 @@ sudo sed -i 's/^#listen_addresses = \x27localhost\x27/listen_addresses = \x27*\x
 sudo sed -i "s|\(host  *all  *all  *\)$OLD_IP|\1$NEW_IP\t\ttrust\t#|" /var/lib/pgsql/14/data/pg_hba.conf
 echo "starting postgres..."
 sudo systemctl start postgresql-14
+cd /opt
+curl http://download.virtualbox.org/virtualbox/5.0.20/VBoxGuestAdditions_5.0.20.iso \
+                       -o VBoxGuestAdditions_5.0.20.iso
+sudo mount VBoxGuestAdditions_5.0.20.iso -o loop /mnt
+cd /mnt
+sudo sh VBoxLinuxAdditions.run --nox11
+cd /opt
+sudo rm *.iso
+cat /dev/null > ~/.bash_history
